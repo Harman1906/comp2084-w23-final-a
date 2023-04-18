@@ -47,7 +47,12 @@ namespace GeorgianEgg.Controllers
                 .Include(p => p.Brand)
                 .ToList();
 
+            //alphabetical order
+            
+            products.Sort((x, y) => string.Compare(x.Name, y.Name));
+
             return View(products);
+
         }
 
         // GET Shop/Cart
@@ -245,6 +250,7 @@ namespace GeorgianEgg.Controllers
             await _context.SaveChangesAsync();
 
             return RedirectToAction("Details", "Orders", new { @id = order.Id });
+
         }
 
         // POST Shop/AddToCart
